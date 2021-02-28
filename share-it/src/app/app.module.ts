@@ -8,9 +8,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { AppComponent } from './app.component';
 
 FullCalendarModule.registerPlugins([
-    dayGridPlugin,
-    timeGridPlugin,
+    dayGridPlugin,  
     listPlugin,
+    timeGridPlugin,
     interactionPlugin
 ])
 

@@ -70,11 +70,6 @@ export class AppComponent {
     handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     }
-
-  //alerts the date clicked
-  handleDateClick(arg: { dateStr: string; }) {
-    alert('date click! ' + arg.dateStr)
-  }
   
   title: any;
 }

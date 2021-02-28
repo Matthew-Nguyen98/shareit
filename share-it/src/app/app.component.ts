@@ -10,21 +10,6 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 })
 export class AppComponent {
 
-<<<<<<< HEAD
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-
-    //creates events title and across one date
-    dateClick: this.handleDateClick.bind(this), // bind is important!
-    
-    events: [
-      //creates an event range
-      { title: 'event range ', start: '2021-02-27', end: '2021-03-03' },
-      //creates an even over 1 day
-      { title: 'event 2', date: '2021-02-28' }
-    ]
-  };
-=======
     calendarVisible = true;
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -85,7 +70,6 @@ export class AppComponent {
     handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     }
->>>>>>> 4a9a28708206ef0645856acc2d1e0732629210f1
 
   //alerts the date clicked
   handleDateClick(arg: { dateStr: string; }) {

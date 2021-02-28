@@ -1,24 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
 import { AppComponent } from './app.component';
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);
+FullCalendarModule.registerPlugins([
+    dayGridPlugin,
+    timeGridPlugin,
+    listPlugin,
+    interactionPlugin
+])
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FullCalendarModule // register FullCalendar with you app
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        FullCalendarModule // import the FullCalendar module! will make the FullCalendar component available
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
+
 export class AppModule { }

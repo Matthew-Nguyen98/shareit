@@ -58,24 +58,16 @@ export class AppComponent {
 
     if (title) {
       
-    calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
+        calendarApi.addEvent({
+            id: createEventId(),
+            title,
+            start: selectInfo.startStr,
+            end: selectInfo.endStr,
+            allDay: selectInfo.allDay
     });
     }
-        if (title) {
-            calendarApi.addEvent({
-                id: createEventId(),
-                title,
-                start: selectInfo.startStr,
-                end: selectInfo.endStr,
-                allDay: selectInfo.allDay
-            });
-        }
-    }
+       
+}
 
     handleEventClick(clickInfo: EventClickArg) {
         if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {

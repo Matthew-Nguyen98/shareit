@@ -7,8 +7,8 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
 
+export class AppComponent {
     calendarVisible = true;
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -39,20 +39,21 @@ export class AppComponent {
     }
 
     handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
+        this.calendarVisible = !this.calendarVisible;
     }
 
     handleWeekendsToggle() {
-    const { calendarOptions } = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
+        const { calendarOptions } = this;
+        calendarOptions.weekends = !calendarOptions.weekends;
     }
 
     handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
+        const title = prompt('Please enter a new title for your event');
+        const calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+        calendarApi.unselect(); // clear date selection
 
+<<<<<<< HEAD:share-it/src/app/app.component.ts
     if (title) {
       
     calendarApi.addEvent({
@@ -63,16 +64,30 @@ export class AppComponent {
         allDay: selectInfo.allDay
     });
     }
+=======
+        if (title) {
+            calendarApi.addEvent({
+                id: createEventId(),
+                title,
+                start: selectInfo.startStr,
+                end: selectInfo.endStr,
+                allDay: selectInfo.allDay
+            });
+        }
+>>>>>>> 45a67a66c6d0ef1b6079ded0d334d0a4673a704a:src/app/app.component.ts
     }
 
     handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-    clickInfo.event.remove();
-    }
+        if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+            clickInfo.event.remove();
+        }
     }
 
     handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
+        this.currentEvents = events;
     }
+<<<<<<< HEAD:share-it/src/app/app.component.ts
   
+=======
+>>>>>>> 45a67a66c6d0ef1b6079ded0d334d0a4673a704a:src/app/app.component.ts
 }

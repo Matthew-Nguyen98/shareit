@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
+import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
+
+
 @Component({
-    selector: 'app-root',
+    selector: 'app-root', 
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
+
 
 export class AppComponent {
     calendarVisible = true;
@@ -34,6 +37,10 @@ export class AppComponent {
     };
     currentEvents: EventApi[] = [];
 
+    handleAllDay(){
+     this.calendarOptions.allDaySlot = !this.calendarOptions.allDaySlot;
+    }
+
     handleCalendarToggle() {
         this.calendarVisible = !this.calendarVisible;
     }
@@ -49,6 +56,16 @@ export class AppComponent {
 
         calendarApi.unselect(); // clear date selection
 
+    if (title) {
+      
+    calendarApi.addEvent({
+        id: createEventId(),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+    });
+    }
         if (title) {
             calendarApi.addEvent({
                 id: createEventId(),
@@ -69,4 +86,22 @@ export class AppComponent {
     handleEvents(events: EventApi[]) {
         this.currentEvents = events;
     }
+
+    step = 0;
+
+    setStep(index: number) {
+      this.step = index;
+    }
+  
+    nextStep() {
+      this.step++;
+    }
+  
+    prevStep() {
+      this.step--;
+    }
 }
+
+
+    
+  

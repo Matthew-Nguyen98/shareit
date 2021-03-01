@@ -12,6 +12,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 
 export class AppComponent {
+    
     calendarVisible = true;
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -34,9 +35,11 @@ export class AppComponent {
         eventChange:
         eventRemove:
         */
+       
     };
+    color: string ="";
     currentEvents: EventApi[] = [];
-
+     
     handleAllDay(){
      this.calendarOptions.allDaySlot = !this.calendarOptions.allDaySlot;
     }
@@ -50,10 +53,10 @@ export class AppComponent {
         calendarOptions.weekends = !calendarOptions.weekends;
     }
 
+
     handleDateSelect(selectInfo: DateSelectArg) {
         const title = prompt('Please enter a new title for your event');
-        const calendarApi = selectInfo.view.calendar;
-
+        const calendarApi = selectInfo.view.calendar;      
         calendarApi.unselect(); // clear date selection
 
     if (title) {
@@ -63,7 +66,8 @@ export class AppComponent {
             title,
             start: selectInfo.startStr,
             end: selectInfo.endStr,
-            allDay: selectInfo.allDay
+            allDay: selectInfo.allDay,
+            backgroundColor: this.color
     });
     }
        

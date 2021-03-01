@@ -31,8 +31,15 @@
                     <mat-label>End Time</mat-label>
                     <input matInput type="time">
                   </mat-form-field>
+                  
+                    <mat-label>Choose your event color</mat-label>                  
+                    <input #colorInput matInput type="text" class="validate" 
+                    name="color" (input)="color = colorInput.value" placeholder = "blue">
+                  
+
                 </mat-expansion-panel>
               </mat-accordion>
+
 
         </div>
         <div class='demo-app-sidebar-section'>

@@ -20,10 +20,12 @@ FullCalendarModule.registerPlugins([
     ],
     imports: [
         BrowserModule,
-        FullCalendarModule // import the FullCalendar module! will make the FullCalendar component available
+        FullCalendarModule// import the FullCalendar module! will make the FullCalendar component available
+
     ],
     providers: [],
     bootstrap: [AppComponent]
 })
 
 export class AppModule { }
+

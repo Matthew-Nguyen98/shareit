@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
+import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
-
 
 @Component({
     selector: 'app-root',
@@ -35,6 +34,10 @@ export class AppComponent {
     };
     currentEvents: EventApi[] = [];
 
+    handleAllDay(){
+     this.calendarOptions.allDaySlot = !this.calendarOptions.allDaySlot;
+    }
+
     handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
     }
@@ -51,6 +54,7 @@ export class AppComponent {
     calendarApi.unselect(); // clear date selection
 
     if (title) {
+      
     calendarApi.addEvent({
         id: createEventId(),
         title,
@@ -71,5 +75,4 @@ export class AppComponent {
     this.currentEvents = events;
     }
   
-  title: any;
 }

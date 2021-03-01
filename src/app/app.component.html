@@ -10,6 +10,32 @@
             </ul>
         </div>
         <div class='demo-app-sidebar-section'>
+            
+            <mat-accordion class="example-headers-align">
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Timed Event
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Enter Start And End Time
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+              
+                  <mat-form-field>
+                    <mat-label>Start Time</mat-label>
+                    <input matInput type="time">
+                  </mat-form-field>
+              
+                  <mat-form-field>
+                    <mat-label>End Time</mat-label>
+                    <input matInput type="time">
+                  </mat-form-field>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+        </div>
+        <div class='demo-app-sidebar-section'>
             <label>
                 <input
                     type='checkbox'

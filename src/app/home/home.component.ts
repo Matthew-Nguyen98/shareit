@@ -1,6 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { UserService } from '../_services/user.service';
-
 import { Component } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from '../event-utils';
@@ -33,7 +30,10 @@ export class HomeComponent {
         eventChange:
         eventRemove:
         */
-    };
+    }
+
+
+    color: string ="";
     currentEvents: EventApi[] = [];
 
     handleAllDay(){
@@ -49,10 +49,10 @@ export class HomeComponent {
         calendarOptions.weekends = !calendarOptions.weekends;
     }
 
+
     handleDateSelect(selectInfo: DateSelectArg) {
         const title = prompt('Please enter a new title for your event');
-        const calendarApi = selectInfo.view.calendar;
-
+        const calendarApi = selectInfo.view.calendar;      
         calendarApi.unselect(); // clear date selection
 
         if (title) {
@@ -62,18 +62,11 @@ export class HomeComponent {
                 title,
                 start: selectInfo.startStr,
                 end: selectInfo.endStr,
-                allDay: selectInfo.allDay
+                allDay: selectInfo.allDay,
+                backgroundColor: this.color
             });
         }
-        if (title) {
-            calendarApi.addEvent({
-                id: createEventId(),
-                title,
-                start: selectInfo.startStr,
-                end: selectInfo.endStr,
-                allDay: selectInfo.allDay
-            });
-        }
+
     }
 
     handleEventClick(clickInfo: EventClickArg) {
@@ -86,17 +79,6 @@ export class HomeComponent {
         this.currentEvents = events;
     }
 
-    step = 0;
-
-    setStep(index: number) {
-        this.step = index;
-    }
-
-    nextStep() {
-        this.step++;
-    }
-
-    prevStep() {
-        this.step--;
-    }
+    panelOpenState = false;
+  
 }

@@ -1,5 +1,4 @@
 <div class='demo-app'>
-
     <div class='demo-app-sidebar'>
         <div class='demo-app-sidebar-section'>
             <h2>Instructions</h2>
@@ -10,7 +9,7 @@
             </ul>
         </div>
         <div class='demo-app-sidebar-section'>
-            
+
             <mat-accordion class="example-headers-align">
                 <mat-expansion-panel  (closed)="panelOpenState = false;" hideToggle>
                   <mat-expansion-panel-header>
@@ -21,21 +20,21 @@
                       Enter Start And End Time
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-              
+
                   <mat-form-field>
                     <mat-label>Start Time</mat-label>
                     <input matInput type="time">
                   </mat-form-field>
-              
+
                   <mat-form-field>
                     <mat-label>End Time</mat-label>
                     <input matInput type="time">
                   </mat-form-field>
-                  
-                    <mat-label>Choose your event color</mat-label>                  
-                    <input #colorInput matInput type="text" class="validate" 
+
+                    <mat-label>Choose your event color</mat-label>
+                    <input #colorInput matInput type="text" class="validate"
                     name="color" (input)="color = colorInput.value" placeholder = "blue">
-                  
+
 
                 </mat-expansion-panel>
               </mat-accordion>

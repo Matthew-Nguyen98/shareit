@@ -33,6 +33,7 @@ FullCalendarModule.registerPlugins([
         LoginComponent,
         HomeComponent,
         ProfileComponent,
+
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,32 @@
+const mysql = require('mysql');
+const userTable = require('./user.table');
+const config = require('../config/config');
+
+// https://www.terlici.com/2015/08/13/mysql-node-express.html
+
+let conn = null;
+
+exports.connect = () => {
+    conn = mysql.createPool({
+        host: config.sql.host,
+        user: config.sql.user,
+        password: config.sql.password,
+        database: config.sql.database
+    });
+};
+
+exports.initTables = () => {
+    // Create all tables if they do not exist
+    userTable.initTable(conn); 
+};
+
+exports.createUser = (username, password) => {
+    userTable.addUser(conn, username, password);
+};
+
+exports.close = () => {
+    conn.end((err) => {
+        if (err)
+            throw err;
+    })
+}

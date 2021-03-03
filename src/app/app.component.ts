@@ -5,14 +5,14 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 
 @Component({
-    selector: 'app-root', 
+    selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
 
 
 export class AppComponent {
-    
+
     calendarVisible = true;
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -35,11 +35,14 @@ export class AppComponent {
         eventChange:
         eventRemove:
         */
-       
+
     };
-    color: string ="";
+    color = '';
     currentEvents: EventApi[] = [];
-     
+
+    panelOpenState = false;
+  title: any;
+
     handleAllDay(){
      this.calendarOptions.allDaySlot = !this.calendarOptions.allDaySlot;
     }
@@ -56,11 +59,11 @@ export class AppComponent {
 
     handleDateSelect(selectInfo: DateSelectArg) {
         const title = prompt('Please enter a new title for your event');
-        const calendarApi = selectInfo.view.calendar;      
+        const calendarApi = selectInfo.view.calendar;
         calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      
+        if (title) {
+
         calendarApi.addEvent({
             id: createEventId(),
             title,
@@ -70,7 +73,7 @@ export class AppComponent {
             backgroundColor: this.color
     });
     }
-       
+
 }
 
     handleEventClick(clickInfo: EventClickArg) {
@@ -83,9 +86,7 @@ export class AppComponent {
         this.currentEvents = events;
     }
 
-    panelOpenState = false;
 }
 
 
-    
-  
+

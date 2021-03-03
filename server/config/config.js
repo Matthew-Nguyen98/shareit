@@ -10,12 +10,16 @@ const envVarsSchema = Joi.object({
         .default('development'),
     SERVER_PORT: Joi.number()
         .default(4040),
-    // JWT_SECRET: Joi.string().required()
-    //     .description('JWT Secret required to sign'),
+    JWT_SECRET: Joi.string().required()
+        .description('JWT Secret required to sign'),
     SQL_HOST: Joi.string().required()
-        .description('Mongo DB host url'),
-    SQL_PORT: Joi.number()
-        .default(27017)
+        .description("Host that runs the SQL server"),
+    SQL_USER: Joi.string().required()
+        .description("User that has access to the SQL database"),
+    SQL_PASSWORD: Joi.string().required()
+        .description("Password to login as User on the SQL database"),
+    SQL_DATABASE: Joi.string().required()
+        .description("SQL database name")
 }).unknown()
   .required();
 
@@ -24,6 +28,10 @@ if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
 
+//     user: config.sql.user,
+//     password: config.sql.password,
+//     database: config.sql.database
+
 const config = {
     env: envVars.NODE_ENV,
     port: envVars.SERVER_PORT,
@@ -31,7 +39,9 @@ const config = {
     frontend: envVars.MEAN_FRONTEND || 'angular',
     sql: {
         host: envVars.SQL_HOST,
-        port: envVars.SQL_PORT
+        user: envVars.SQL_USER,
+        password: envVars.SQL_PASSWORD,
+        database: envVars.SQL_DATABASE
     }
 };
 

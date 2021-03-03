@@ -10,9 +10,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-// const routes = require('../routes/index.route');
+const routes = require('../routes/index.route');
 const config = require('./config');
-// const passport = require('./passport')
+const passport = require('./passport')
 
 const app = express();
 
@@ -20,7 +20,7 @@ if (config.env === 'development') {
     app.use(logger('dev'));
 }
 
-var distDir = '../dist/share-it/';
+var distDir = '../../dist/share-it/';
 
 app.use(express.static(path.join(__dirname, distDir)))
 app.use(/^((?!(api)).)*/, (req, res) => {
@@ -40,12 +40,12 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // API router
-// app.use('/api/', routes);
+app.use('/api/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

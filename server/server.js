@@ -7,7 +7,7 @@ const db = require('./database/db.js');
 if (!module.parent) {
     db.connect();
     db.initTables();
-    db.close();
+    // db.close();
 
     app.listen(config.port, () => {
         console.info(`server started on port ${config.port} (${config.env})`);

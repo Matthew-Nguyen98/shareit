@@ -28,15 +28,10 @@ if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
 
-//     user: config.sql.user,
-//     password: config.sql.password,
-//     database: config.sql.database
-
 const config = {
     env: envVars.NODE_ENV,
     port: envVars.SERVER_PORT,
     jwtSecret: envVars.JWT_SECRET,
-    frontend: envVars.MEAN_FRONTEND || 'angular',
     sql: {
         host: envVars.SQL_HOST,
         user: envVars.SQL_USER,

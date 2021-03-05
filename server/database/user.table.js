@@ -1,4 +1,3 @@
-const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 
 const TABLE_NAME = 'users';
@@ -15,24 +14,15 @@ exports.initTable = (conn) => {
 }
 
 exports.addUser = (conn, username, plaintextPassword) => {
-    conn.query(`SELECT * FROM ${TABLE_NAME} WHERE username='${username}'`, 
-        (err, results, fields) => {
+    bcrypt.hash(plaintextPassword, SALT_ROUNDS, (err, hash) => {
         if (err) 
             throw err;
 
-        if (results.length > 0)
-            return;  
-
-        bcrypt.hash(plaintextPassword, SALT_ROUNDS, (err, hash) => {
-            if (err) 
+        conn.query(`INSERT IGNORE INTO ${TABLE_NAME} VALUES (?, ?)`,
+            [username, hash], 
+            (err, results, fields) => {
+            if (err)
                 throw err;
-
-            conn.query(`INSERT INTO ${TABLE_NAME} VALUES (?, ?)`,
-                [username, hash], 
-                (err, results, fields) => {
-                if (err)
-                    throw err;
-            });
         });
-    });    
+    });
 }

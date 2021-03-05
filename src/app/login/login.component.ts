@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     // };
     @ViewChild('username') username!: ElementRef;
     @ViewChild('password') password!: ElementRef;
+    @ViewChild('message') message!: ElementRef;
     // password = '';
     isLoggedIn = false;
     isLoginFailed = false;
@@ -59,6 +60,14 @@ export class LoginComponent implements OnInit {
         this.http.post<any>('/api/auth/register', { username, password }).subscribe(data => {
             // this.postId = data.id;
             console.log(data);
+            console.log(this.message.nativeElement);
+            if (data.success) {
+                this.message.nativeElement.className = 'alert alert-success';
+                this.message.nativeElement.innerText = 'Successfully created account';
+            } else {
+                this.message.nativeElement.className = 'alert alert-danger';
+                this.message.nativeElement.innerText = 'Username in use, try again';
+            }
         });
     }
 

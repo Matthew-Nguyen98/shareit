@@ -10,8 +10,10 @@ const router = express.Router();
 module.exports = router;
 
 async function register(req, res, next) {
-    db.connect();
-    db.createUser(req.body.username, req.body.password);
+    db.connect()
+      .then(() => {
+        db.createUser(req.body.username, req.body.password);
+    })
     // db.close();
     next();
 }

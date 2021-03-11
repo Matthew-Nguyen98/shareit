@@ -1,12 +1,16 @@
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component } from '@angular/core';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from '../event-utils';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent {
     calendarVisible = true;
     calendarOptions: CalendarOptions = {
@@ -35,6 +39,17 @@ export class HomeComponent {
 
     color: string ="";
     currentEvents: EventApi[] = [];
+    startTime: string ="";
+    endTime: string ="";
+    date: string ="";
+
+
+    events: string[] = [];
+  
+    addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    //   this.events.push(`${type}: ${event.value}`);
+    //   console.log(event.value);
+    }
 
     handleAllDay(){
         this.calendarOptions.allDaySlot = !this.calendarOptions.allDaySlot;
@@ -42,6 +57,14 @@ export class HomeComponent {
 
     handleCalendarToggle() {
         this.calendarVisible = !this.calendarVisible;
+    }
+
+
+    //submit button getting the information of start time, end time and date.
+    saveDate(){
+        console.log(this.endTime);
+        console.log(this.startTime);
+        console.log(this.date);
     }
 
     handleWeekendsToggle() {

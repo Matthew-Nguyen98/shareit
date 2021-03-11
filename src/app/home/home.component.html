@@ -22,21 +22,34 @@
                   </mat-expansion-panel-header>
 
                   <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Select A Date"
+                           (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [(ngModel)]="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field>
                     <mat-label>Start Time</mat-label>
-                    <input matInput type="time">
+                    <input matInput type="time" [(ngModel)]="startTime">
                   </mat-form-field>
 
                   <mat-form-field>
                     <mat-label>End Time</mat-label>
-                    <input matInput type="time">
+                    <input matInput type="time" [(ngModel)]="endTime">
                   </mat-form-field>
 
                     <mat-label>Choose your event color</mat-label>
                     <input #colorInput matInput type="text" class="validate"
                     name="color" (input)="color = colorInput.value" placeholder = "blue">
+                
+                    <br>
+                    <button  mat-raised-button (click)="saveDate()">Submit</button>
+
 
 
                 </mat-expansion-panel>
+
+                
               </mat-accordion>
 
 

@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -46,9 +48,10 @@ FullCalendarModule.registerPlugins([
         BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatNativeDateModule
     ],
-    providers: [authInterceptorProviders],
+    providers: [authInterceptorProviders,MatDatepickerModule],
     bootstrap: [AppComponent]
 })
 

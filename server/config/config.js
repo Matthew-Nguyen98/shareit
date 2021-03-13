@@ -9,7 +9,7 @@ const envVarsSchema = Joi.object({
         .allow('development', 'production', 'test', 'provision')
         .default('development'),
     SERVER_PORT: Joi.number()
-        .default(4040),
+        .default(8080),
     JWT_SECRET: Joi.string().required()
         .description('JWT Secret required to sign'),
     SQL_HOST: Joi.string().required()

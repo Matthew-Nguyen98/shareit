@@ -11,21 +11,23 @@ module.exports = router;
 
 async function register(req, res, next) {
     db.connect()
-      .then(() => {
-        db.createUser(req.body.username, req.body.password);
-    })
-    // db.close();
+        .then(() => { return db.createUser(req.body.username, req.body.password); })
+        .then(results => {
+            res.json({ success: results.affectedRows > 0 });
+            // db.close();
+        }).catch(err => {
+            throw err;
+        });
     next();
 }
 
 function login(req, res) {
-    // let user = req.user;
-    // console.log(user);
-    // let token = authCtrl.generateToken(user);
-    // res.json({ user, token });
-    res.json({  });
+    let user = req.user;
+    let token = authCtrl.generateToken(user);
+    res.json({ user, token });
+    // res.json({ success: true, user: '', accessTocken: '' });
 }
 
-router.post('/register', asyncHandler(register), login);
+router.post('/register', asyncHandler(register), (req, res) => { res.json({}) });
 router.post('/login', passport.authenticate('local', { session: false }), login);
 router.get('/me', passport.authenticate('jwt', { session: false }), login);

@@ -23,14 +23,13 @@ if (config.env === 'development') {
 
 const distDir = '../../dist/share-it/';
 
-app.use(express.static(path.join(__dirname, distDir)))
+app.use(express.static(path.join(__dirname, distDir)));
 app.use(/^((?!(api)).)*/, (req, res) => {
     res.sendFile(path.join(__dirname, distDir + '/index.html'));
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.use(cookieParser());
 app.use(compress());

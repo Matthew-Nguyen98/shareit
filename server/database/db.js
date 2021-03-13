@@ -25,10 +25,9 @@ exports.connect = () => {
 
 exports.initTables = () => {
     // Create all tables if they do not exist
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
         userTable.initTable(conn)
             .then(results => {
-                console.log(results);
                 resolve(results);
             }).catch(err => {
                 reject(err);
@@ -37,11 +36,21 @@ exports.initTables = () => {
 };
 
 exports.createUser = (username, password) => {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
         userTable.addUser(conn, username, password)
             .then(results => {
-                console.log(results);
                 resolve(results);
+            }).catch(err => {
+                reject(err);
+            });
+    });
+};
+
+exports.verifyCredentials = (username, password) => {
+    return new Promise((resolve, reject) => {
+        userTable.verifyCredentials(conn, username, password)
+            .then(isCorrectPassword => {
+                resolve(isCorrectPassword);
             }).catch(err => {
                 reject(err);
             });
@@ -53,4 +62,4 @@ exports.close = () => {
         if (err)
             throw err;
     })
-}
+};

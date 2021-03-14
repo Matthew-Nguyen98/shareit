@@ -9,7 +9,7 @@ const envVarsSchema = Joi.object({
         .allow('development', 'production', 'test', 'provision')
         .default('development'),
     SERVER_PORT: Joi.number()
-        .default(4040),
+        .default(8080),
     JWT_SECRET: Joi.string().required()
         .description('JWT Secret required to sign'),
     SQL_HOST: Joi.string().required()
@@ -28,15 +28,10 @@ if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
 
-//     user: config.sql.user,
-//     password: config.sql.password,
-//     database: config.sql.database
-
 const config = {
     env: envVars.NODE_ENV,
     port: envVars.SERVER_PORT,
     jwtSecret: envVars.JWT_SECRET,
-    frontend: envVars.MEAN_FRONTEND || 'angular',
     sql: {
         host: envVars.SQL_HOST,
         user: envVars.SQL_USER,

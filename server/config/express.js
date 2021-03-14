@@ -4,6 +4,7 @@ const httpError = require('http-errors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
@@ -20,9 +21,9 @@ if (config.env === 'development') {
     app.use(logger('dev'));
 }
 
-var distDir = '../../dist/share-it/';
+const distDir = '../../dist/share-it/';
 
-app.use(express.static(path.join(__dirname, distDir)))
+app.use(express.static(path.join(__dirname, distDir)));
 app.use(/^((?!(api)).)*/, (req, res) => {
     res.sendFile(path.join(__dirname, distDir + '/index.html'));
 });
@@ -40,7 +41,10 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
+app.use(session({ secret: config.jwtSecret, resave: true, saveUninitialized: true }));
+
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

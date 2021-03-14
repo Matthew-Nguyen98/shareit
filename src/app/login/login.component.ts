@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -8,16 +9,20 @@ import { TokenStorageService } from '../_services/token-storage.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    form: any = {
-        username: null,
-        password: null
-    };
+    // form: any = {
+    //     username: null,
+    //     password: null
+    // };
+    @ViewChild('username') username!: ElementRef;
+    @ViewChild('password') password!: ElementRef;
+    @ViewChild('message') message!: ElementRef;
+    // password = '';
     isLoggedIn = false;
     isLoginFailed = false;
     errorMessage = '';
     roles: string[] = [];
 
-    constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+    constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private http: HttpClient) { }
 
     ngOnInit(): void {
         if (this.tokenStorage.getToken()) {
@@ -27,23 +32,43 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(): void {
-        const { username, password } = this.form;
+        // const { username, password } = this.form;
+        
+//         this.authService.login(this.username, this.password).subscribe(
+//             data => {
+//                 this.tokenStorage.saveToken(data.accessToken);
+//                 this.tokenStorage.saveUser(data);
+// 
+//                 this.isLoginFailed = false;
+//                 this.isLoggedIn = true;
+//                 this.roles = this.tokenStorage.getUser().roles;
+//                 this.reloadPage();
+//             },
+//             err => {
+//                 this.errorMessage = err.error.message;
+//                 this.isLoginFailed = true;
+//             }
+//         );
+    }
 
-        this.authService.login(username, password).subscribe(
-            data => {
-                this.tokenStorage.saveToken(data.accessToken);
-                this.tokenStorage.saveUser(data);
+    register(): void {
+        // const { username, password } = this.username, this.password;
+        const username = this.username.nativeElement.value;
+        const password = this.password.nativeElement.value;
 
-                this.isLoginFailed = false;
-                this.isLoggedIn = true;
-                this.roles = this.tokenStorage.getUser().roles;
-                this.reloadPage();
-            },
-            err => {
-                this.errorMessage = err.error.message;
-                this.isLoginFailed = true;
+        // TODO: POST request
+        this.http.post<any>('/api/auth/register', { username, password }).subscribe(data => {
+            // this.postId = data.id;
+            console.log(data);
+            console.log(this.message.nativeElement);
+            if (data.success) {
+                this.message.nativeElement.className = 'alert alert-success';
+                this.message.nativeElement.innerText = 'Successfully created account';
+            } else {
+                this.message.nativeElement.className = 'alert alert-danger';
+                this.message.nativeElement.innerText = 'Username in use, try again';
             }
-        );
+        });
     }
 
     reloadPage(): void {

@@ -4,3 +4,5 @@
     height: 80vh;
     width: 95em;
 }
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
